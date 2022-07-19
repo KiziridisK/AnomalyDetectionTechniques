@@ -28,7 +28,33 @@ def calculate_distance(a: DataPoint, b: DataPoint):
     return math.sqrt(sum_of_values)
 
 
-# def k_nn(list_of_points, k):
+# Global method -Outlier score is set to  be the average to distance to the average distance
+# of the data point to its k-nearest neighbors.
+def k_nn(list_of_data_points, k):
+
+    scores = []
+    sum_of_dist = 0
+    for obj in list_of_data_points:
+        for i in range(k):
+            sum_of_dist += obj.distances[i]
+        avg_distance = sum_of_dist/k
+        scores.append([list_of_data_points.index(obj), avg_distance])
+    scores.sort(reverse=True)
+    print(scores)
+
+
+# Global method - Outlier score is set to be the distance to the k-th neighbor
+def k_nn_th(list_of_data_points, k):
+
+    scores = []
+    i = 0
+    for obj in list_of_data_points:
+        scores[i] = obj.distances[k-1]
+        i += 1
+
+
+def lof(list_of_data_points):
+    
 
 
 def main():
@@ -56,9 +82,10 @@ def main():
             list_of_data_points[i].distances.append(calculate_distance(list_of_data_points[i], list_of_data_points[j]))
 
     for obj in list_of_data_points:
-        obj.distances.sort(reverse=True)
+        obj.distances.sort()
 
-    print(list_of_data_points[0].distances)
+    #print(list_of_data_points[0].distances)
+    k_nn(list_of_data_points, 5)
 
 
 if __name__ == "__main__":
