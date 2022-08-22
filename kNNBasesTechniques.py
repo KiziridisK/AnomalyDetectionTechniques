@@ -53,10 +53,6 @@ def k_nn_th(list_of_data_points, k):
         i += 1
 
 
-def lof(list_of_data_points):
-    
-
-
 def main():
     # Reading data file to retrieve data points/
     data = get_data()
