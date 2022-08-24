@@ -18,8 +18,8 @@ def main():
     header = ['X', 'Y']
 
     random_list = random_points(1, 100, 100)
-    for i in range(len(random_list)):
-        print(random_list[i])
+    #for i in range(len(random_list)):
+        #print(random_list[i])
 
     with open("datasetSmall.csv", 'w', encoding='UTF8') as f:
         writer = csv.writer(f)

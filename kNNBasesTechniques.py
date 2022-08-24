@@ -2,6 +2,7 @@ from numpy import array
 from classes import DataPoint
 import csv
 import math
+import time
 
 
 # Help functions
@@ -39,8 +40,10 @@ def k_nn(list_of_data_points, k):
             sum_of_dist += obj.distances[i]
         avg_distance = sum_of_dist/k
         scores.append([list_of_data_points.index(obj), avg_distance])
-    scores.sort(reverse=True)
-    print(scores)
+        sum_of_dist = 0
+
+    sorted_scores = sorted(scores, key=lambda x: x[1], reverse=True)
+    print(sorted_scores)
 
 
 # Global method - Outlier score is set to be the distance to the k-th neighbor
@@ -49,11 +52,16 @@ def k_nn_th(list_of_data_points, k):
     scores = []
     i = 0
     for obj in list_of_data_points:
-        scores[i] = obj.distances[k-1]
+        scores.append([list_of_data_points.index(obj), obj.distances[k-1]])
         i += 1
+    sorted_scores = sorted(scores, key=lambda x: x[1], reverse=True)
+    print(sorted_scores)
 
 
 def main():
+    # Setting the start time
+    start_time = time.time()
+
     # Reading data file to retrieve data points/
     data = get_data()
     d = array(data)
@@ -75,13 +83,18 @@ def main():
 
     for i in range(len(list_of_data_points)):
         for j in range(len(list_of_data_points)):
-            list_of_data_points[i].distances.append(calculate_distance(list_of_data_points[i], list_of_data_points[j]))
+            list_of_data_points[i].distances.append(calculate_distance
+                                                    (list_of_data_points[i], list_of_data_points[j]))
 
     for obj in list_of_data_points:
         obj.distances.sort()
 
     #print(list_of_data_points[0].distances)
-    k_nn(list_of_data_points, 5)
+    #k_nn(list_of_data_points, 5)
+    k_nn_th(list_of_data_points, 5)
+    # Getting the end time
+    end_time = time.time()
+    print("Time needed for code execution: ", end_time - start_time, " seconds.")
 
 
 if __name__ == "__main__":

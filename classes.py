@@ -17,7 +17,6 @@ class Bin:
 
     def __init__(self):
         self.points = []
-        self.width = 0
         self.height = 0
 
 
