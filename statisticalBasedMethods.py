@@ -3,8 +3,7 @@
 from numpy import array
 from classes import*
 import csv
-import math
-
+import time
 
 def get_data():
 
@@ -53,7 +52,6 @@ def create_histogram(w, data_points):
             if j == 0:
                 number = data_points[i].values[0]
                 bin_num = check_bin(number)
-                print(bin_num)
                 histogram_x.bins[bin_num-1].points.append(number)
                 histogram_x.bins[bin_num-1].height += 1
                 data_points[i].bin_x = bin_num
@@ -88,6 +86,10 @@ def calculate_scores(data_points, histograms):
 
 
 def main():
+
+    # Setting start time
+    start_time = time.time()
+
     # Reading data file to retrieve data points/
     data = get_data()
     d = array(data)
@@ -106,6 +108,10 @@ def main():
 
     histograms = create_histogram(10, list_of_data_points)
     calculate_scores(list_of_data_points, histograms)
+
+    #Getting end time
+    end_time = time.time()
+    print("Time needed for code execution: ", end_time - start_time, " seconds.")
 
 
 if __name__ == "__main__":

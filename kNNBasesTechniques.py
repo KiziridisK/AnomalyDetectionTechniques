@@ -8,7 +8,7 @@ import time
 # Help functions
 def get_data():
 
-    with open('datasetSmall.csv', newline='') as f:
+    with open('dataset.csv', newline='') as f:
         reader = csv.reader(f)
         data = list(reader)
 
