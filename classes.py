@@ -24,3 +24,8 @@ class Histogram:
     def __init__(self):
         self.bins = []
 
+
+class TimeObj:
+    def __init__(self, h, m):
+        self.hour = h
+        self.minute = m
