@@ -3,6 +3,7 @@ import csv
 import pandas as pd
 
 
+# Random points generator, returns list that contains the random points to  main  function
 def random_points(start, end, num):
     random_list = []
     for i in range(num):
@@ -14,18 +15,22 @@ def random_points(start, end, num):
     return random_list
 
 
+# Main function. Gets random points, formats them and saves them in a csv file.
 def main():
+
+    # Setting header for csv file
     header = ['X', 'Y']
 
+    # Getting random points
     random_list = random_points(1, 100, 100)
-    #for i in range(len(random_list)):
-        #print(random_list[i])
 
+    # Creating the csv file, and inserting data
     with open("datasetSmall.csv", 'w', encoding='UTF8') as f:
         writer = csv.writer(f)
         writer.writerow(header)
         writer.writerows(random_list)
 
+    # Using pandas dataframe functions to modify the content of the file
     df = pd.read_csv('datasetSmall.csv')
     modifieddf = df.dropna()
     modifieddf.to_csv('datasetSmall.csv', index=False)

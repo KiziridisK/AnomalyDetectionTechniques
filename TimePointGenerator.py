@@ -4,18 +4,22 @@ import csv
 from classes import TimeObj
 
 
+# Random data generator. It creates univariate time data using the TimeObj Class.
 def random_time_points(start, end, num):
     random_list = []
 
+    # Creating |num| data points that contain an X variable and a TimeObj object.
     for i in range(num):
         hour = random.randint(0, 23)
         minute = random.randint(0, 59)
         random_element = [random.randint(start, end), TimeObj(hour, minute)]
         random_list.append(random_element)
 
+    # Returning the list of random data to main function.
     return random_list
 
 
+#
 def main():
     header = ['X', 'H', 'M']
 
