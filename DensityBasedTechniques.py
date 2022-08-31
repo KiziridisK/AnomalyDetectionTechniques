@@ -1,10 +1,9 @@
 from classes import *
-from numpy import array
 import csv
-import math
 import time
 
 
+# Help function
 def get_data():
 
     with open('datasetTimeSmall.csv', newline='') as f:
@@ -14,9 +13,13 @@ def get_data():
     return data
 
 
+# Function for calculating the time difference between 2 TimeObj Objects (in minutes).
+# This function is used to see if a TimeObj object is inside a certain time interval with another TimeObj Object.
 def calculate_time_diff(a: TimeObj, b: TimeObj):
 
     time_diff = 0
+
+    # Finding starting and ending time
     if a.hour > b.hour:
         starting = b
         ending = a
@@ -27,6 +30,7 @@ def calculate_time_diff(a: TimeObj, b: TimeObj):
         time_diff = abs(a.minute - b.minute)
         return time_diff
 
+    # Calculating the difference
     if ending.minute > starting.minute:
         time_diff = abs(a.hour - b.hour) * 60 + abs(a.minute - b.minute)
     elif ending.minute < starting.minute:
@@ -34,9 +38,11 @@ def calculate_time_diff(a: TimeObj, b: TimeObj):
         ending.minute += 60
         time_diff = abs(a.hour - b.hour) * 60 + abs(a.minute - b.minute)
 
+    # Returning the result
     return time_diff
 
 
+# Function that checks if 2 numbers are contained  in a certain interval
 def check_r(a, b, r):
 
     if abs(a - b) < r:
@@ -74,8 +80,6 @@ def main():
     start_time = time.time()
 
     data = get_data()
-    d = array(data)
-    dimensions = d.shape[1]
 
     # Change data type for latter use
     for i in range(len(data) - 1):
@@ -87,8 +91,10 @@ def main():
         list_of_data_points.append([data[i+1][0], TimeObj(data[i+1][1], data[i+1][2])])
 
     outliers = density_based_outlier_detection(10, 250, 3, list_of_data_points)
-    print(len(outliers))
-    print(outliers)
+
+    for i in range(len(outliers)):
+        print("Index: ", outliers[i][0], "Value: ", outliers[i][1][0], "Time: ",
+              outliers[i][1][1].hour, "Minute: ", outliers[i][1][1].minute)
 
     # Getting the end time
     end_time = time.time()

@@ -89,8 +89,6 @@ def main():
     for obj in list_of_data_points:
         obj.distances.sort()
 
-    #print(list_of_data_points[0].distances)
-    #k_nn(list_of_data_points, 5)
     k_nn_th(list_of_data_points, 5)
     # Getting the end time
     end_time = time.time()
@@ -99,7 +97,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
-
-

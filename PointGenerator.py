@@ -32,8 +32,8 @@ def main():
 
     # Using pandas dataframe functions to modify the content of the file
     df = pd.read_csv('datasetSmall.csv')
-    modifieddf = df.dropna()
-    modifieddf.to_csv('datasetSmall.csv', index=False)
+    modified_df = df.dropna()
+    modified_df.to_csv('datasetSmall.csv', index=False)
 
 
 if __name__ == "__main__":

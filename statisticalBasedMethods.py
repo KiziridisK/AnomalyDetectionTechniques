@@ -5,6 +5,7 @@ from classes import*
 import csv
 import time
 
+
 def get_data():
 
     with open('datasetSmall.csv', newline='') as f:
@@ -109,7 +110,7 @@ def main():
     histograms = create_histogram(10, list_of_data_points)
     calculate_scores(list_of_data_points, histograms)
 
-    #Getting end time
+    # Getting end time
     end_time = time.time()
     print("Time needed for code execution: ", end_time - start_time, " seconds.")
 
